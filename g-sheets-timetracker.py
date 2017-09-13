@@ -32,13 +32,16 @@ class GSheetsTimetracker:
     self.start()
 
   def start(self):
-    print('{} Tracking time for project: "{}" on task: "{}"'.format(self.start_time, self.project, self.task))
-
     # write to google sheet
+    print('Updating data..')
     self.row_id = self.sheet.next_available_row()
     self.sheet.update_acell('A{}'.format(self.row_id), self.project)
     self.sheet.update_acell('B{}'.format(self.row_id), self.task)
     self.sheet.update_acell('C{}'.format(self.row_id), self.start_time)
+
+    print('{} Tracking time for project: "{}" on task: "{}"'.format(self.start_time, self.project, self.task))
+    print('Press Ctrl + C to stop tracking..')
+
 
   def end(self, signal, frame):
     if not self.ended:
